@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lab3 ="clr-namespace:lab3;assembly=lab3"
+             x:Class="lab3.MainPage"
+             x:DataType="lab3:ViewModel">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="#cccccc" />
+                <Setter Property="BackgroundColor" Value="#cccccc" />
+                <Setter Property="FontSize" Value="Title" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Spacing="0" Orientation="Vertical">
+        <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <StackLayout Spacing="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="Fill">
+                    <Frame BackgroundColor="#CCCCFF" Padding="10, 10, 10, 5" HorizontalOptions="FillAndExpand" > 
+                        <Entry x:Name="productNameEntry" Placeholder="Название продукта" Background="White" FontSize="Medium" 
+                               HorizontalOptions="FillAndExpand"/>
+                    </Frame>
+                    <Frame BackgroundColor="#CCCCFF" Padding="10, 10, 10, 5" HorizontalOptions="End" >
+                        <Label Background="White" Text="{Binding Quantity}" FontSize="Medium" VerticalTextAlignment="Center" 
+                               WidthRequest="20" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                </StackLayout>
+                <Frame BackgroundColor="#CCCCFF" Padding="5" HorizontalOptions="FillAndExpand" >
+                    <Slider x:Name="productQuantityStepper" Maximum="50" Minimum="1"
+                            Value="{Binding Quantity}"
+                            HorizontalOptions="FillAndExpand"
+                            ThumbColor="{Binding Clr}"/>
+                </Frame>
+            </StackLayout>
+
+            <Frame BackgroundColor="#CCCCFF" Padding="7, 2, 7, 2" HorizontalOptions="End">
+                <Button  x:Name="AddButton" HorizontalOptions="End"
+                         BackgroundColor="White" FontSize="Large" Text="+" TextColor="#6600cc" HeightRequest="20" CornerRadius="60"
+                         Command = "{Binding AddCommand}"
+                         CommandParameter="{Binding Source={Reference productNameEntry}, Path=Text}"/>
+            </Frame>
+        </StackLayout>
+
+        
+
+        <Frame Padding="2" BackgroundColor="{Binding Clr}">
+            <StackLayout Spacing="2" Orientation="Horizontal">
+                <RelativeLayout WidthRequest="45" HeightRequest="45" >
+                    <Button x:Name="Red"
+                            BorderColor="#ff3300" CornerRadius="10" BorderWidth="24"
+                            Command = "{Binding ChangeColor}"
+                            CommandParameter="{Binding Source={Reference Red}, Path=BorderColor}"/>
+                </RelativeLayout>
+                <RelativeLayout WidthRequest="45" HeightRequest="45">
+                    <Button BorderColor="#ff99ff" CornerRadius="10" BorderWidth="24"
+                            x:Name="Purp"
+                            Command = "{Binding ChangeColor}"
+                            CommandParameter="{Binding Source={Reference Purp}, Path=BorderColor}"/>
+                </RelativeLayout>
+                <RelativeLayout WidthRequest="45" HeightRequest="45">
+                    <Button BorderColor="#ff6600" CornerRadius="10" BorderWidth="24"
+                            x:Name="Orange"
+                            Command = "{Binding ChangeColor}"
+                            CommandParameter="{Binding Source={Reference Orange}, Path=BorderColor}"/>
+                </RelativeLayout>
+
+                <RelativeLayout WidthRequest="45" HeightRequest="45">
+                    <Button BorderColor="#ffff00" CornerRadius="10" BorderWidth="24"
+                            x:Name="Yellow"
+                            Command = "{Binding ChangeColor}"
+                            CommandParameter="{Binding Source={Reference Yellow}, Path=BorderColor}"/>
+                </RelativeLayout>
+
+                <RelativeLayout WidthRequest="45" HeightRequest="45">
+                    <Button BorderColor="#66ff99" CornerRadius="10" BorderWidth="24"
+                            x:Name="Green"
+                            Command = "{Binding ChangeColor}"
+                            CommandParameter="{Binding Source={Reference Green}, Path=BorderColor}"/>
+                </RelativeLayout>
+                <RelativeLayout WidthRequest="45" HeightRequest="45">
+                    <Button BorderColor="#6699ff" CornerRadius="10" BorderWidth="24"
+                            x:Name="Blue"
+                            Command = "{Binding ChangeColor}"
+                            CommandParameter="{Binding Source={Reference Blue}, Path=BorderColor}"/>
+                </RelativeLayout>
+                <RelativeLayout WidthRequest="45" HeightRequest="45">
+                    <Button BorderColor="#99ffff" CornerRadius="10" BorderWidth="24"
+                            x:Name="Cyan"
+                            Command = "{Binding ChangeColor}"
+                            CommandParameter="{Binding Source={Reference Cyan}, Path=BorderColor}"/>
+                </RelativeLayout>
+
+
+
+
+            </StackLayout>
+        </Frame>
+
+        <CollectionView ItemsSource="{Binding Products}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="lab3:Product">
+                    <StackLayout Orientation="Horizontal" Spacing="0" Padding="1, 0, 1, 0" HorizontalOptions="FillAndExpand">
+                        <Frame BackgroundColor="{Binding Clr}" Padding="7, 2, 2, 1" HorizontalOptions="FillAndExpand">
+                            <Label BackgroundColor="#CCCCFF" FontSize="Medium" Text="{Binding Name}" HorizontalOptions="FillAndExpand"/>
+                        </Frame>
+                        <Frame BackgroundColor="{Binding Clr}" Padding="7, 2, 2, 1">
+                            <Label BackgroundColor="#CCCCFF" FontSize="Medium" Text="{Binding Quantity}"
+                                   WidthRequest="20"/>
+                        </Frame>
+                        <Frame BackgroundColor="{Binding Clr}" Padding="7, 2, 2, 1">
+                            <CheckBox Color="#CCCCFF"
+                                      IsChecked="{Binding Checked}"/>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+        <Frame VerticalOptions="End"  BackgroundColor="#013440">
+            <Button Text="Удалить" CornerRadius="30" BorderColor="#593954" FontSize="Small" BackgroundColor="White"
+                    Command="{Binding DelChecked}"
+                />
+        </Frame>
+
+    </StackLayout>
+    
+</ContentPage>
